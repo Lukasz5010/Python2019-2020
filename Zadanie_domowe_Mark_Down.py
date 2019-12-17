@@ -4,23 +4,26 @@ class Element:
         self.content=content
 
     def render(self):
-        pass
+        print(self.content)
 
 class Document:
     def __init__(self):
         self.elements=[]
 
     def add_element(self, element:Element):
-        self.elements.extend(element)
+        self.elements.append(element)
 
     def render(self):
+        for i in self.elements:
+            self.elements=i.__str__()
         return '\n'.join(self.elements)
 
+    def __str__(self):
+        return f'{self.content}'
 
 class HeaderElement(Element):
-    def render(self):
+    def __str__(self):
         print(self.content)
-        print()
         print('='*len(self.content))
 
 
@@ -32,11 +35,11 @@ class LinkElement(Element):
 
 
     def render(self):
-        print(f'({napis})[http://{link}]')
+        print(f'({self.napis})[http://{self.link}]')
 
 
- document = Document()
- document.add_element(HeaderElement('Header'))
- document.add_element(LinkElement('ABC', 'abc.com'))
- document.add_element(Element('Simple'))
- document.render()
+document = Document()
+document.add_element(HeaderElement('Header'))
+document.add_element(LinkElement('ABC', 'abc.com'))
+document.add_element(Element('Simple'))
+document.render()
